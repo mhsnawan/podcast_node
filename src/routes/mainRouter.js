@@ -10,6 +10,8 @@ mainRouter.route('/')
         var collection = db.collection('podcast');
         collection.find({}).toArray(
             function(err, results){
+                console.log('hello')
+                console.log(results);
                 if (err) throw err;
                 res.render('index.ejs', {data:results});
                 db.close();
@@ -31,7 +33,10 @@ mainRouter.route('/album/:id')
                 });
             });
     });
-
+mainRouter.route('/add')
+    .get(function (req, res) {
+        res.render('add.ejs');
+    });
 mainRouter.route('/postalbum')
     .get(function(req, res){
         mongodb.connect(url,function(err,db){

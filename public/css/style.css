@@ -1,53 +1,3 @@
-@import "../css/font-awesome.min.css";
-/* ==== Table of contents ====
-    0.0  - Less and General Styles
-    1.0  - UI elements
-        1.1- Overlay
-        1.2 - Section Title
-        1.3 - Bordered Image
-        1.4 - Social Netwroks
-        1.5 - Page Headers
-        1.7 - Pagination
-        1.8 - Filter
-        1.9 - Nivo Lightbox 
-    2.0  - Navigation
-    3.0  - Rvolution Slider
-    4.0 - Home Music Player
-        4.1 - Default Music Player
-    5.0 - Single Album
-        5.1 - Album Home
-        5.2 - Album page
-    6.0 - Band Members
-        6.1 - Artist Single
-        6.2 - Biography
-    7.0 - Radio Schedule
-    8.0 - Podcast Post
-    9.0 - Blog Post Home
-        9.1 - Blog Pages
-        9.2 - Comments
-        9.3 - Sidebar
-    10.0 - Gallery
-    11.0 - Event Countdown
-        11.1 - Event multiple
-        11.2 - Event single
-        11.3 - Event Page Wrapper
-        11.4 - Events Page
-    12.0 - Shop Product
-        12.1 - Shop Single
-        12.2 - Shop Page Wrapper
-        12.3 - Shop Sidebar
-    13.0 - Video Gallery
-    14.0 - Contact Form
-    15.0 - Newsletter
-    16.0 - 404 Page
-    17.0 - Cart Page
-    18.0 - Coming Soon Page
-    19.0 - Footer
-    20.0 - Less Variables and mixins
- =============================*/
-/*--------------------------------------------------------------
-0.0 - General Styles
---------------------------------------------------------------*/
 html,
 body {
   position: relative;
@@ -73,7 +23,7 @@ ol {
 button,
 input {
   background: none;
-  border: none;
+  border: 1px solid white;
   padding: 0;
   outline: 0;
 }
@@ -3241,9 +3191,6 @@ p {
   color: #cccccc;
   list-style-type: circle;
 }
-/*--------------------------------------------------------------
-12.2 - Shop Page Wrapper
---------------------------------------------------------------*/
 .shop-page-wrapper .top-bar select {
   background: #171a25;
   border: none;
@@ -3564,9 +3511,6 @@ p {
   margin-top: 5px;
   background: rgba(26, 26, 26, 0.9);
 }
-/*--------------------------------------------------------------
-16.0 - 404 Page
---------------------------------------------------------------*/
 .page-404-wrapper {
   text-align: center;
 }
@@ -3588,9 +3532,6 @@ p {
 .page-404-wrapper .btn {
   margin-top: 25px;
 }
-/*--------------------------------------------------------------
-17.0 - Cart Page
---------------------------------------------------------------*/
 .cart-page-wrapper .cart {
   width: 100%;
   position: relative;
@@ -3731,9 +3672,6 @@ p {
     float: none;
   }
 }
-/*--------------------------------------------------------------
-18.0 - Coming Soon Page
---------------------------------------------------------------*/
 .coming-soon-page-wrapper {
   background: #0b0d13 url(../img/backgrounds/bg-9.jpg) no-repeat fixed center center;
   background-size: cover ;
@@ -3789,10 +3727,6 @@ p {
     padding: 10px 15px;
   }
 }
-/*--------------------------------------------------------------
-19.0 - Footer
---------------------------------------------------------------*/
-/* Widgets */
 .widget h4.widget-title {
   text-transform: uppercase;
   font-weight: 700;
@@ -3941,7 +3875,6 @@ p {
   margin-right: 5px;
   margin-bottom: 5px;
 }
-/* Footer  */
 #colophon {
   padding: 60px 0 0;
   background: #050609;
@@ -3956,12 +3889,6 @@ p {
     margin-bottom: 40px;
   }
 }
-/*--------------------------------------------------------------
-20.0 - Less Variables and mixins
---------------------------------------------------------------*/
-/*--------------------------------------------------------------
-25.5 - Animations
---------------------------------------------------------------*/
 @-webkit-keyframes pulse-1 {
   0% {
     -webkit-transform: scale(1);
@@ -3998,7 +3925,6 @@ p {
     transform: scale(1.05);
   }
 }
-/* Menu Nav Animation */
 @-webkit-keyframes menuFadeUp {
   from {
     opacity: 0;
@@ -4029,7 +3955,6 @@ p {
     top: 50px;
   }
 }
-/* MiniCart Nav Animation */
 @-webkit-keyframes minicartFadeUp {
   from {
     opacity: 0;
