@@ -41,16 +41,16 @@ mainRouter.route('/postalbum')
     .get(function(req, res){
         mongodb.connect(url,function(err,db){
            var data ={
-               'artistname': 'Tamar Avishaie',
-               'collectionname': 'The Lonely Palette',
-               'feedurl': 'http://www.thelonelypalette.com',
-               'artworkurlsmall': '',
-               'language': 'EN',
-               'podcast_cover': 'https://assets3.thrillist.com/v1/image/1862685/size/tmg-article_tall;jpeg_quality=20.jpg'
+               'artistname': req.body.artistname,
+               'collectionname': req.body.collectionname,
+               'feedurl': req.body.feedurl,
+               'artworkurlsmall': req.body.artworkurlsmall,
+               'language': req.body.language,
+               'podcast_cover': req.body.podcast_cover
            };
             var collection = db.collection('podcast');
             collection.insert(data, function (err, results) {
-                console.log(results)
+                console.log(results);
                 db.close();
                 res.send('sucessfully added');
             });
@@ -62,15 +62,14 @@ mainRouter.route('/postepisodes')
         mongodb.connect(url,function(err,db){
             name = 'The Lonely Palette';
            var data ={
-               'podcast_id': '5b09212c2e940404109c745a',
-               'podcast_name': name,
-               'title': 'Nude Self-Portrait',
-               'pubdate': '26 May, 2017',
-               'duration': '29:30',
-               'description': 'Each episode, host Tamar Avishai picks a painting du jour, interviews unsuspecting museum visitors in front of it, and then dives deeply into the objec',
-               'summary': 'Ep. 29 - Egon Schiele "Nude Self-Portrait" (1910)',
-               'audiourl': 'https://soundcloud.com/the-lonely-palette/ep-29-egon-schieles-nude-self-portrait-1910',
-               'imageurl': 'https://static1.squarespace.com/static/56e978a6859fd0cc7eba29d0/56e988b61d07c093a0bc558e/5ade8c78aa4a996c380d1244/1524788729325/IMG-7194.JPG?format=2500ws',
+               'podcast_name': req.body.podcast_name,
+               'title': req.body.title,
+               'pubdate': req.body.pubdate,
+               'duration': req.body.duration,
+               'description': req.body.description,
+               'summary': req.body.summary,
+               'audiourl': req.body.audiourl,
+               'imageurl': req.body.imageurl
            };
             var collection = db.collection('episode');
             collection.find({'name': name }, function (err, results) {
