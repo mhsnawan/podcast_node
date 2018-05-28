@@ -25,20 +25,42 @@ mainRouter.route('/album/:id')
         console.log(name);
         mongodb.connect(url,function(err,db){
             var collection = db.collection('episode');
-            collection.findOne({podcast_name: name}, function(err, results){
+            collection.find({podcast_name: name}).toArray(
+                function(err, results){
                 if (err) throw err;
-                res.render('singlealbum.ejs', {data:results});
-                console.log(results);
+                    var collection = db.collection('podcast');
+                    collection.findOne({collectionname: name},
+                    function(err, results1){
+                    if (err) throw err;
+                    res.render('singlealbum.ejs', {data:results, data1:results1});
+                    console.log(results1);
+                    db.close();
+                    });
                 db.close();
                 });
             });
     });
+
+
 mainRouter.route('/add')
     .get(function (req, res) {
-        res.render('add.ejs');
+        mongodb.connect(url,function(err,db){
+        var collection = db.collection('podcast');
+        collection.find({}).toArray(
+            function(err, results){
+                console.log(results);
+                if (err) throw err;
+                res.render('add.ejs', {data:results});
+                db.close();
+            });
+        });
+        
+        //res.render('add.ejs');
     });
+
+
 mainRouter.route('/postalbum')
-    .get(function(req, res){
+    .post(function(req, res){
         mongodb.connect(url,function(err,db){
            var data ={
                'artistname': req.body.artistname,
@@ -58,11 +80,11 @@ mainRouter.route('/postalbum')
     });
 
 mainRouter.route('/postepisodes')
-    .get(function(req, res){
+    .post(function(req, res){
         mongodb.connect(url,function(err,db){
-            name = 'The Lonely Palette';
            var data ={
                'podcast_name': req.body.podcast_name,
+               'episode_name': req.body.episode_name,
                'title': req.body.title,
                'pubdate': req.body.pubdate,
                'duration': req.body.duration,
@@ -72,11 +94,10 @@ mainRouter.route('/postepisodes')
                'imageurl': req.body.imageurl
            };
             var collection = db.collection('episode');
-            collection.find({'name': name }, function (err, results) {
-                collection.insert(data, function (err, results1) {
-                    res.send('Succesffult added');
-                });
+            collection.insert(data, function (err, results1) {
+                res.send('Succesffult added');
             });
+            
         });
     });
 

@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>MusicBase HTML</title>
+	<title>Podcast Music</title>
 	<!-- Favicon -->
 	<link rel="shortcut icon" type="image/ico" href="img/favicon.ico" />
 	<!-- Google Fonts -->
@@ -37,9 +37,9 @@
 					<li class="active has-child">
 						<a href="/">Home</a>
 					</li>
-					<li class="has-child">
+					<!-- <li class="has-child">
 						<a href="/album">Albums</a>
-					</li>
+					</li> -->
 				</ul>
 			</nav>
 		</div>
@@ -109,19 +109,30 @@
 				<div class="row albums filterable-content">
 					<form class="form-horizontal" method="post" action="/postepisodes">
 						<div class="form-group">
-							<label class="control-label col-sm-2" for="email">Episode Name:</label>
+							<label class="control-label col-sm-2" for="podcast_name">Podcast Name:</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" name="podcast_name" id="email">
+								<select class="form-control col-sm-4 selectpicker" name="podcast_name">
+									<% for (var i=0;i < data.length; i++) { %>
+									<option value="<%= data[i].collectionname %>"><%= data[i].collectionname %></option>
+									<% } %>
+								</select>
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label class="control-label col-sm-2" for="pwd">Episode Name : </label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" name="episode_name">
 							</div>
 						</div>
 						<br>
 						<div class="form-group">
-							<label class="control-label col-sm-2" for="pwd">Title : </label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" name="Title">
+								<label class="control-label col-sm-2" for="pwd">Title : </label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" name="title">
+								</div>
 							</div>
-						</div>
-						<br>
+							<br>
 						<div class="form-group">
 							<label class="control-label col-sm-2" for="pwd">Publish Date : </label>
 							<div class="col-sm-10">
