@@ -14,6 +14,7 @@ app.use('/', mainRouter);
 app.use('/album/:id', mainRouter);
 app.use('/postalbum', mainRouter);
 app.use('/postepisodes', mainRouter);
+app.use('/search', mainRouter);
 
 app.listen(port, function () {
     console.log("Listening on port " + port);

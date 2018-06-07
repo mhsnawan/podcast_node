@@ -10,8 +10,6 @@ mainRouter.route('/')
         var collection = db.collection('podcast');
         collection.find({}).toArray(
             function(err, results){
-                console.log('hello')
-                console.log(results);
                 if (err) throw err;
                 res.render('index.ejs', {data:results});
                 db.close();
@@ -99,6 +97,44 @@ mainRouter.route('/postepisodes')
             });
             
         });
+    });
+
+mainRouter.route('/search')
+    .post(function(req,res){
+        query = req.body.query;
+        console.log('Im search')
+        mongodb.connect(url,function(err,db){
+             var collection = db.collection('podcast');
+             collection.find({},function(err,results){
+                episodes = {};
+                if(err)
+                    throw err;
+                if(results == null){
+                    var episode ={
+                        'podcast_name':'',
+                        'episode_name': '',
+                        'title': '',
+                        'pubdate': '',
+                        'duration': '',
+                        'description':'',
+                        'summary': '',
+                        'audiourl': '',
+                        'imageurl': ''
+                    };
+                }
+                    
+                else{
+                    episodes = results;
+                }
+                    
+                    
+                episode_result = episodes.filter(word => str(word).contains(query));
+                console.log(episode_result);
+                res.render('singlealbum.ejs', {data:episode_result, data1:episode_result});
+                
+            });
+             
+         });
     });
 
 module.exports = mainRouter;

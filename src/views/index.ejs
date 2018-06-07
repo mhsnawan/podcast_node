@@ -22,10 +22,7 @@
 	
 	<!-- Header -->
 	<header id="site-header">
-		<form action="#" id="search-header" name="search-header">
-			<input type="search" name="search" placeholder="Type and Hit Enter..">
-			<button>Search</button>
-		</form>
+		
 		<div class="container nav-wrapper">
 			<!-- Logo -->
 			<div class="site-branding">
@@ -34,6 +31,7 @@
 					<span class="second-word">Music</span>
 				</a>
 			</div>
+			
 			<!-- Main Mneu -->
 			<nav id="site-navigation" class="site-navigation">
 				<ul id="main-menu">
@@ -45,6 +43,10 @@
 					</li> -->
 				</ul>
 			</nav>
+			<form name="search-header" method="post" action="/search">
+				<input type="search" name="query" placeholder="Type and Hit Enter..">
+				<button>Search</button>
+			</form>
 			<!-- Extra Nav -->
 		</div>
 	</header>
