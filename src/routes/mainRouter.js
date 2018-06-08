@@ -3,7 +3,7 @@ var mainRouter = express.Router();
 var mongodb = require('mongodb').MongoClient;
 var url = require('../config/mongodb');
 var ObjectID = require('mongodb').ObjectID;
-
+var str = require('string');
 mainRouter.route('/')
     .get(function(req, res){
         mongodb.connect(url,function(err,db){
@@ -99,42 +99,65 @@ mainRouter.route('/postepisodes')
         });
     });
 
-mainRouter.route('/search')
+mainRouter.route('/searchByPodcast')
     .post(function(req,res){
         query = req.body.query;
-        console.log('Im search')
         mongodb.connect(url,function(err,db){
              var collection = db.collection('podcast');
+             var podcast = {};
              collection.find({},function(err,results){
                 episodes = {};
                 if(err)
                     throw err;
                 if(results == null){
-                    var episode ={
-                        'podcast_name':'',
+                    podcast ={
+                        'artistname': '',
+                        'collectionname': '',
+                        'feedurl': '',
+                        'artworkurlsmall': '',
+                        'language': '',
+                        'podcast_cover': ''
+                    };
+                }   
+                else{
+                    podcast = results;
+                }
+                pod = podcast.filter(word => str(word).contains(query));
+                res.render('index.ejs', {data:pod});
+            });
+         });
+    });
+mainRouter.route('/searchByEpisode')
+    .post(function (req, res) {
+        query = req.body.query;
+        mongodb.connect(url, function (err, db) {
+            var collection = db.collection('episode');
+            var episode = {};
+            collection.find({}, function (err, results) {
+                episodes = {};
+                if (err)
+                    throw err;
+                if (results == null) {
+                    episode = {
+                        'podcast_name': '',
                         'episode_name': '',
                         'title': '',
                         'pubdate': '',
                         'duration': '',
-                        'description':'',
+                        'description': '',
                         'summary': '',
                         'audiourl': '',
                         'imageurl': ''
                     };
                 }
-                    
-                else{
-                    episodes = results;
+                else {
+                    episode = results;
                 }
-                    
-                    
-                episode_result = episodes.filter(word => str(word).contains(query));
-                console.log(episode_result);
-                res.render('singlealbum.ejs', {data:episode_result, data1:episode_result});
-                
+                pod = episode.filter(word => str(word).contains(query));
+                console.log(pod);
+                res.render('index.ejs', { data: pod });
             });
-             
-         });
+        });
     });
 
 module.exports = mainRouter;
